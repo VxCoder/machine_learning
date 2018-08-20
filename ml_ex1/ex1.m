@@ -44,10 +44,10 @@ m = length(y); % number of training examples
 
 % Plot Data
 % Note: You have to complete the code in plotData.m
-plotData(X, y);
+% plotData(X, y);
 
-fprintf('Program paused. Press enter to continue.\n');
-pause;
+% fprintf('Program paused. Press enter to continue.\n');
+% pause;
 
 %% =================== Part 3: Cost and Gradient descent ===================
 
@@ -86,7 +86,7 @@ fprintf(' -3.6303\n  1.1664\n\n');
 hold on; % keep previous plot visible
 plot(X(:,2), X*theta, '-')
 legend('Training data', 'Linear regression')
-hold off % don't overlay any more plots on this figure
+hold off % do not overlay any more plots on this figure
 
 % Predict values for population sizes of 35,000 and 70,000
 predict1 = [1, 3.5] *theta;
