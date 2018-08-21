@@ -18,7 +18,7 @@ for iter = 1:num_iters
     %
 
 
-    theta = theta - alpha / m * sum( X'*(X*theta - y), 2);  
+    theta = theta - alpha / m * X'*(X*theta - y);  
 
     % ============================================================
 
