@@ -30,6 +30,8 @@ J = 0;
 Theta1_grad = zeros(size(Theta1));
 Theta2_grad = zeros(size(Theta2));
 
+
+
 % ====================== YOUR CODE HERE ======================
 % Instructions: You should complete the code by working through the
 %               following parts.
@@ -62,23 +64,42 @@ Theta2_grad = zeros(size(Theta2));
 %               and Theta2_grad from Part 2.
 %
 
+% for s1 = 400, s2= 25, s3= 10
+% Matrix Y
+
+Y = zeros(m, num_labels); % [5000, 10]
+for i = 1: m
+  Y(i,y(i)) = 1;
+endfor
 
 
+a1 = [ones(1,m) ; X']; % [401, 5000]
+z2 = Theta1 * a1; % [25, 5000]
+a2 = [ones(1,m); sigmoid(z2)]; % [26, 5000]
+z3 = Theta2 * a2; % [10, 5000]
+h = a3 = sigmoid(z3); % [10 ,5000]
 
+% J only
+J = -1/m * sum(sum((log(h).*Y' + log(1-h).*(1-Y'))));
 
+% J with regularization
+J = J + lambda/(2*m)*(sum(Theta1(:,2:end)(:).^2) + sum(Theta2(:,2:end)(:).^2));
 
+% grad
+delta3 = a3 - Y';  % [10, 5000]
 
+delta2 = Theta2'(2:end,:) * delta3 .* sigmoidGradient(z2); % [25, 5000]
 
+..........................................................
 
+for i = 1 : m
+  Theta2_grad = Theta2_grad  + delta3(:,i) * a2(:,i)';
+  Theta1_grad = Theta1_grad  + delta2(:,i) * a1(:,i)';
 
+endfor;
 
-
-
-
-
-
-
-
+Theta2_grad = (1/m) * Theta2_grad;
+Theta1_grad = (1/m) * Theta1_grad;
 
 % -------------------------------------------------------------
 
