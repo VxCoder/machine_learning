@@ -87,7 +87,6 @@ J = J + lambda/(2*m)*(sum(Theta1(:,2:end)(:).^2) + sum(Theta2(:,2:end)(:).^2));
 
 % grad
 delta3 = a3 - Y';  % [10, 5000]
-
 delta2 = Theta2'(2:end,:) * delta3 .* sigmoidGradient(z2); % [25, 5000]
 
 ..........................................................
@@ -95,11 +94,12 @@ delta2 = Theta2'(2:end,:) * delta3 .* sigmoidGradient(z2); % [25, 5000]
 for i = 1 : m
   Theta2_grad = Theta2_grad  + delta3(:,i) * a2(:,i)';
   Theta1_grad = Theta1_grad  + delta2(:,i) * a1(:,i)';
-
 endfor;
 
-Theta2_grad = (1/m) * Theta2_grad;
-Theta1_grad = (1/m) * Theta1_grad;
+Theta1(:, 1) = 0;
+Theta2(:, 1) = 0;
+Theta2_grad = (1/m) * Theta2_grad + (lambda/m)*Theta2;
+Theta1_grad = (1/m) * Theta1_grad + (lambda/m)*Theta1;
 
 % -------------------------------------------------------------
 
